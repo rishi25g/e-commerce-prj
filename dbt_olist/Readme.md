@@ -28,3 +28,11 @@ Ensure data quality and reliability
 # Screen shots of output
 
 ![alt text](ingest_bigquery.png)
+
+![alt text](dbtdebug.png)
+
+![alt text](snapshot.png)
+
+![alt text](<dbt run.png>)
+
+![alt text](<dbt run2.png>)
