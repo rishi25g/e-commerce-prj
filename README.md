@@ -284,7 +284,7 @@ Raw CSV Files → BigQuery → DBT Staging → Snapshots → Dimension/Fact Tabl
     ```
 2. Run the analysis script:
     ```bash
-    python my_analysis.py
+    python myinsight.py
     ```
 3. Check `presentation/` for generated charts and images
 
