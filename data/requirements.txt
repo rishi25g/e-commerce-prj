@@ -1,0 +1,12 @@
+pandas
+pyarrow
+google-cloud-bigquery
+google-auth
+pandas-gbq
+
+
+
+
+
+
+#pip install -r requirements.txt
