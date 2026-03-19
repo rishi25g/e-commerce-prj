@@ -1,0 +1,210 @@
+version: 1.0.0
+
+models:
+  - name: stg_customers
+    description: "Cleaned staging table for customers from customer_data.csv"
+    columns:
+      - name: customer_id
+        description: "Unique identifier for each customer"
+        tests:
+          - not_null
+          - unique
+      - name: customer_unique_id
+        description: "Customer unique identifier across orders"
+        tests:
+          - not_null
+      - name: customer_zip_code_prefix
+        description: "Customer ZIP code prefix"
+      - name: customer_city
+        description: "City of the customer"
+      - name: customer_state
+        description: "State of the customer"
+
+  - name: stg_orders
+    description: "Staging table for orders"
+    columns:
+      - name: order_id
+        description: "Unique identifier for each order"
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: "Customer who placed the order"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_id
+      - name: order_status
+        description: "Current order status"
+        tests:
+          - not_null
+      - name: order_purchase_timestamp
+        description: "Timestamp of order purchase"
+        tests:
+          - not_null
+      - name: order_approved_at
+        description: "Timestamp when order was approved"
+      - name: order_delivered_carrier_date
+        description: "Timestamp when order was handed to carrier"
+      - name: order_delivered_customer_date
+        description: "Timestamp when customer received the order"
+      - name: order_estimated_delivery_date
+        description: "Expected delivery timestamp"
+
+  - name: stg_product
+    description: "Staging table for products"
+    columns:
+      - name: product_id
+        description: "Unique product identifier"
+        tests:
+          - not_null
+          - unique
+      - name: product_category_name
+        description: "Product category name"
+      - name: product_name_lenght
+        description: "Length of product name"
+      - name: product_description_lenght
+        description: "Length of product description"
+      - name: product_photos_qty
+        description: "Number of photos for the product"
+      - name: product_weight_g
+        description: "Weight of product in grams"
+      - name: product_length_cm
+        description: "Length in cm"
+      - name: product_height_cm
+        description: "Height in cm"
+      - name: product_width_cm
+        description: "Width in cm"
+
+  - name: stg_order_items
+    description: "Staging table for order items"
+    columns:
+      - name: order_id
+        description: "Order identifier"
+        tests:
+          - not_null
+      - name: order_item_id
+        description: "Order item sequence number"
+        tests:
+          - not_null
+      - name: product_id
+        description: "ID of the product"
+        tests:
+          - not_null
+      - name: seller_id
+        description: "ID of the seller"
+        tests:
+          - not_null
+      - name: shipping_limit_date
+        description: "Deadline for shipping the product"
+      - name: price
+        description: "Price of the product"
+        tests:
+          - not_null
+      - name: freight_value
+        description: "Shipping cost of the item"
+
+  - name: stg_payments
+    description: "Staging table for order payments"
+    columns:
+      - name: order_id
+        description: "Order identifier"
+        tests:
+          - not_null
+      - name: payment_sequential
+        description: "Payment sequence number for the order"
+      - name: payment_type
+        description: "Payment method (credit_card, boleto, etc.)"
+        tests:
+          - not_null
+      - name: payment_installments
+        description: "Number of payment installments"
+      - name: payment_value
+        description: "Payment amount"
+        tests:
+          - not_null
+
+
+  - name: stg_reviews
+    description: "Staging for order_reviews table"
+    columns:
+      - name: review_id
+        description: "Primary key"
+
+          
+  - name: stg_seller
+    description: "Staging table for sellers"
+    columns:
+      - name: seller_id
+        description: "Unique seller identifier"
+        tests:
+          - not_null
+          - unique
+      - name: seller_zip_code_prefix
+        description: "Seller ZIP code prefix"
+      - name: seller_city
+        description: "City of the seller"
+      - name: seller_state
+        description: "State of the seller"
+
+
+  - name: stg_products_category_name_translation
+    description: "Translation table mapping Portuguese product categories to English"
+    columns:
+      - name: product_category_name
+        description: "Original Portuguese product category name"
+        tests:
+          - not_null
+          - unique
+
+      - name: product_category_name_english
+        description: "English translation of the product category name"
+        tests:
+          - not_null
+
+  - name: stg_geolocation
+    description: "Geolocation dataset containing latitude and longitude information for Brazilian zip code prefixes."
+    columns:
+    - name: geolocation_zip_code_prefix
+      description: "Zip code prefix associated with the geolocation record."
+      tests:
+        - not_null
+
+    - name: geolocation_lat
+      description: "Latitude coordinate of the geolocation point."
+      tests:
+        - not_null
+
+    - name: geolocation_lng
+      description: "Longitude coordinate of the geolocation point."
+      tests:
+        - not_null
+
+    - name: geolocation_city
+      description: "City corresponding to the geolocation record."
+
+    - name: geolocation_state
+      description: "State corresponding to the geolocation record."
+
+
+
+# why do i need to write schema.yml during staging
+
+# Many beginners get confused between source.yml and schema.yml in dbt.
+
+# Short answer:
+# You don’t strictly need schema.yml for staging to run models, but it is strongly recommended because it adds tests, documentation, and metadata.
+
+# What schema.yml Is Used For
+
+# schema.yml defines:
+
+# tests
+# documentation
+# column descriptions
+# It does not transform data. It only adds metadata and data quality checks.
+
+#Use not_null on all primary keys and foreign keys.
+#Use unique on identifiers like customer_id, order_id, review_id.
+#Use relationships tests on foreign keys (example: stg_orders.customer_id → stg_customers.customer_id).

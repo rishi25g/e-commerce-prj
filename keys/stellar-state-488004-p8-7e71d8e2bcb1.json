@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "stellar-state-488004-p8",
+  "private_key_id": "7e71d8e2bcb137ed760964f7b432d88be75cc14d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDr+/cQKPdnLvlM\n3DPHEtEk9BCObY11mxpYPA77rbNRUhPvZf3rE6i3L+1CxuSs6M78+sdnSQ7vWQVB\ntZ6vuorepq90BoVUYdRtmZPEDjd1CA3sOieNJr7Km7aE7bFkiOcL3ZCD5FNjuPx/\ncdK8/VF8nlKKhzfCaCK36ZGnPT3vEg/PMvtQj33Bz+M1nfpyKWYmAGwEigOzf8Yx\ng2ZaKzOs8Jm6oCwarPONU4BQ+jGI3u1rMNe0YwbVt3AaEuuKpMxtCSr8pLw0WZlL\nEjsKmAcrm1zI8JknxrX6+Exg3yWAieeEEJMPLw1QGv9U1qMreZt1BIvdlNfhRlzz\nSZHa4mTDAgMBAAECggEAC+YWBI4UP3MqZdo6kCCeRA88YHocpl/uOaG5na4Z+xE4\n6RrK7VX97VKw02uk7yUD/tSERmx0INRrw+7s8+5jfyuHcEG96k3OgMI8JagT2sZP\nsWgTQ3Y/K4cjcltr1OZkRABlf4j9PWt/68so9ZeOSsrO3aZIxPgsO/q+eeDIJSw6\nrYuM602RxM81Le+rYCO62xG9k1cMhSHuw+YJF2D2kjyzW5lE+NkV20TPrJGKLb1v\ngCkMBfFGj5rwCVfAbZs+snIjeYMfWngGi1XyYyKHeUFaI+cAoF9FcDDZgVb69AGz\nxetnUAlo9MVz2Vk1LGLkKPuHXrVdSYrSfuz3lEXMhQKBgQD76Y3YrGuUSZdVgH/0\ntx/9nswzSFMfN1hrXLlxdBuNUPB4i4NI9wi6oSp9aZ+VT7E96JWxv8/lsyikOLcu\n4AE7qsL2u7UGtavmAz+JH0vfnhiQCX/5W8t6u+E74qzNYYxL+ja+cNElcCs41ek1\ntRoBQ61g94f5rtw9uZl+iRmsfwKBgQDv0D7gpeJd4Lrb8O+X+GKJvVkf+i5N3neL\nVy/AzoGI57xMFExe91L6pdfTu9aBKiPxx0eVIDS7WTaMBfDOpo7vVcpCEgVLeEvu\nmDzZu4FAeeLBL1+KMT4kPaJ06xT/xHRs0IdYejWzBq3C8pYAOOVZ0ykzUxJAoUQK\n3seMbOh1vQKBgQDE6EOK+QNCLt/O4pmiFD46RZUCBOeMP/uqOBlwGDytEnZVE2A0\neXxmPTH0Q8qMsHUvmgzgmrkLqCX9b6OoTUpJdGne6MxQiVLrgOB582+gRHiYpgRV\nSq5bql4dLEq8YyKCBPwjkhW5ONtgGrym0X+ZO2hbokC0Jz1aNihH4yyhSwKBgQDW\nMvJGo8R6R6V/mEfZPLF/CBJYPpUnVmL+oaR0mb8Xsqz8Y1EHre9/E6ygYXGqMyKh\n7XZhm7+d64SOMyww2JJo8f7TXtc93rgr5+zKKfG7zmKcXR0ACRXRNwApYGSEQ0we\neW+6toXKX1fK/fS/RBKPVc3CGxv9gE2PTAd+xTQpHQKBgH+EJQIdLm/Jct2059o1\nOZytuyKMEuPCsuVGryGr35a4iuDmcdUQ/daNBpZlbN//XRc4WVapLrpJHbmo+7Tq\nXdZQKqLpPZC/TAipXlgARjj04i8jvZSLIePs7cW6Hfo7Frj1N4rKkIpd2UOxSp5G\nhnADKE9MEHnqI+F/qdOA8zPq\n-----END PRIVATE KEY-----\n",
+  "client_email": "meltanosetup@stellar-state-488004-p8.iam.gserviceaccount.com",
+  "client_id": "104037082350817447302",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/meltanosetup%40stellar-state-488004-p8.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

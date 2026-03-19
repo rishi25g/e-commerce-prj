@@ -1,0 +1,51 @@
+version: 1.0.0
+
+sources:
+  - name: dbt_olist
+    database: stellar-state-488004-p8
+    schema: olist_data
+
+    tables:
+      - name: customers
+      - name: orders
+      - name: order_items
+      - name: products
+      - name: sellers
+      - name: order_reviews
+      - name: order_payments
+      - name: products_category_name_translation
+      - name: geolocation
+
+# My pipeline currently is:
+
+# Python → BigQuery (raw tables) → dbt → Tableau
+
+# The tables loaded by Python are not created by dbt, so dbt needs a way to register them as sources.
+
+# That is what source.yml does.
+
+# Without it, dbt does not know where the raw data comes from.
+
+# What Happens Without source.yml
+
+# If you write:
+
+# select * from ecommerce_dataset.orders
+
+# Problems:
+
+# ❌ dbt cannot track dependencies
+# ❌ dbt docs lineage graph breaks
+# ❌ tests cannot be attached to the table
+# ❌ project becomes harder to maintain
+
+# use above code to 
+# Reference the Table Like This
+
+# Example staging model:
+
+# stg_orders.sql
+
+# select * from {{ source('olist','orders') }}
+
+# This tells dbt:orders table → comes from raw BigQuery dataset

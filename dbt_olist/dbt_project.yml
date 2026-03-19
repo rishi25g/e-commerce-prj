@@ -1,0 +1,36 @@
+
+# Name your project! Project names should contain only lowercase characters
+# and underscores. Define project name, version, paths, materializations per folder, and snapshot configurations.
+ 
+name: 'dbt_olist'
+version: '1.0'
+# config-version: 2
+
+profile: 'dbt_olist'
+
+# Folder where your dbt models live
+model-paths: ["models"]
+
+# Folder for snapshots
+snapshot-paths: ["snapshots"]
+
+# Folder for tests, seeds, macros (optional)
+analysis-paths: ["analysis"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+# data-paths: ["data"]
+
+# Target default schema (can override in profiles.yml)
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# Optional: configure models
+
+# dbt_olist:
+models:
+  dbt_olist:
+    +materialized: view
+  
+    

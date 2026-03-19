@@ -1,0 +1,190 @@
+version: 1.0.0
+
+# sales fact table
+model:
+  - name: fact_sales
+    description: "Fact table capturing product-level sales transactions."
+    columns:
+      - name: order_id
+        description: "Unique order identifier"
+        tests:
+          - not_null
+          - unique
+
+      - name: customer_id
+        description: "Customer placing the order"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_id
+
+      - name: product_id
+        description: "Product purchased"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_products')
+              field: product_id
+
+      - name: seller_id
+        description: "Foreign key for the Seller of the product"
+        tests:
+          - relationships:
+              to: ref('dim_sellers')
+              field: seller_id
+
+      - name: order_purchase_timestamp
+        description: "Timestamp when the order was placed"
+        tests:
+          - not_null
+
+      - name: price
+        description: "Product price"
+
+      - name: freight_value
+        description: "Shipping cost"
+
+      - name: total_sale_amount
+        description: "Total sales amount including freight"
+        tests:
+          - not_null
+
+  - name: customer_lifetime_value
+    tests:
+      - not_null
+
+# -------------------------
+# Order fact table
+# -------------------------
+  - name: fact_orders
+    description: "Fact table for orders with customer, product, and seller information"
+    columns:
+      - name: order_id
+        description: "Primary key for order"
+        tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: "Foreign key to dim_customers"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_id
+      - name: product_id
+        description: "Foreign key to dim_products"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_products')
+              field: product_id
+      - name: seller_id
+        description: "Foreign key to dim_sellers"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_sellers')
+              field: seller_id
+      - name: order_item_id
+        description: "Item sequence in order"
+      - name: order_status
+        description: "Status of the order"
+      - name: order_purchase_timestamp
+        description: "Order purchase date"
+      - name: order_approved_at
+        description: "Order approval date"
+      - name: order_delivered_carrier_date
+        description: "Date shipped to carrier"
+      - name: order_delivered_customer_date
+        description: "Date delivered to customer"
+      - name: order_estimated_delivery_date
+        description: "Expected delivery date"
+      - name: price
+        description: "Price of item"
+      - name: freight_value
+        description: "Shipping cost"
+
+# -------------------------
+# Order payment fact table
+# -------------------------
+  - name: fact_payments
+    description: "Fact table for order payments"
+    columns:
+      - name: order_id
+        description: "Foreign key to fact_orders"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('fact_orders')
+              field: order_id
+      - name: payment_sequential
+        description: "Payment sequence number"
+      - name: payment_type
+        description: "Payment method"
+        tests:
+          - not null
+      - name: payment_installments
+        description: "Number of installments"
+      - name: payment_value
+        description: "Payment amount"
+        tests:
+          - not null
+
+# -------------------------
+# Order reviews fact table
+# -------------------------
+  - name: fact_reviews
+    description: "Fact table for order reviews"
+    columns:
+      - name: review_id
+        description: "Primary key for review"
+        tests:
+          - not_null
+          - unique
+      - name: order_id
+        description: "Foreign key to fact_orders"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('fact_orders')
+              field: order_id
+      - name: review_score
+        description: "Review score (1-5)"
+        tests:
+          - accepted_values:
+              values: [1,2,3,4,5]
+      - name: review_comment_title
+        description: "Review comment title"
+      - name: review_comment_message
+        description: "Full review comment"
+      - name: review_creation_date
+        description: "Timestamp when review was created"
+      - name: review_answer_timestamp
+        description: "Timestamp when the review was answered"
+  
+# Let's add some additional tests to the `fact_sales` model 
+# at the end of `models/schema.yml`:
+
+  # - name: date
+  #   tests:
+  #     - dbt_utils.accepted_range:
+  #         arguments:
+  #             min_value: "PARSE_DATE('%F', '2012-01-01')"
+  #             max_value: "CURRENT_DATE()"
+
+#We can also add the `dbt_utils.expression_is_true` test to 
+#check if the `sale_dollars` field is the product of `bottles_sold` 
+#and `state_bottle_retail` as below.
+
+#Note that the expression below involves multiple columns, 
+#and hence the test must be outside the `columns:` section so as to apply it as a model-level test (put it below `description:`)
+    # tests:
+    #   - dbt_utils.expression_is_true:
+    #       arguments:
+    #         expression: "ROUND(sale_dollars, 1) = TRUNC(bottles_sold * state_bottle_retail, 1)"
+    #         severity: error # accepts only `error` and `warn` default is error
+
+# Use relationships tests for all foreign keys so dbt validates joins automatically.
+# Primary keys like customer_id, product_id, seller_id, order_id, review_id have not_null and unique tests.
+# Column descriptions improve dbt docs for Tableau users.

@@ -1,0 +1,78 @@
+version: 1.0.0
+
+models:
+  # Customer dimension
+  - name: dim_customers
+    description: "Dimension table for customers, built from staging customers"
+    columns:
+      - name: customer_id
+        description: "Primary key for customer"
+        tests:
+          - not_null
+          - unique
+      - name: customer_unique_id
+        description: "Unique identifier across multiple orders"
+        tests:
+          - not_null
+      - name: customer_city
+        description: "City of the customer"
+        tests:
+          - not_null
+      - name: customer_state
+        description: "State of the customer"
+        tests:
+          - not_null
+      - name: customer_zip_code_prefix
+        description: "ZIP code prefix of the customer"
+
+  # Product dimension
+  - name: dim_products
+    description: "Dimension table for products, built from staging products and category translation"
+    columns:
+      - name: product_id
+        description: "Primary key for product"
+        tests:
+          - not_null
+          - unique
+      - name: product_category_name
+        description: "Original product category name"
+        tests:
+          - not_null
+      - name: product_category_name_english
+        description: "English translation of product category"
+        tests:
+          - not_null
+      - name: product_name_lenght
+        description: "Length of product name"
+      - name: product_description_lenght
+        description: "Length of product description"
+      - name: product_photos_qty
+        description: "Number of product photos"
+      - name: product_weight_g
+        description: "Weight in grams"
+      - name: product_length_cm
+        description: "Length in cm"
+      - name: product_height_cm
+        description: "Height in cm"
+      - name: product_width_cm
+        description: "Width in cm"
+
+  # Seller dimension
+  - name: dim_sellers
+    description: "Dimension table for sellers"
+    columns:
+      - name: seller_id
+        description: "Surrogate key for SCD type-2 seller"
+        tests:
+          - not_null
+          - unique
+      - name: seller_city
+        description: "City of the seller"
+        tests:
+          - not_null
+      - name: seller_state
+        description: "State of the seller"
+        tests:
+          - not_null
+      - name: seller_zip_code_prefix
+        description: "ZIP code prefix of the seller"
