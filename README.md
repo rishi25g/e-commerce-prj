@@ -238,19 +238,19 @@ Raw CSV Files → BigQuery → DBT Staging → Snapshots → Dimension/Fact Tabl
     - Count by `product_category_name_english`  
     - Plot top 10 categories  
 
-    ![Top Categories](presentation/top_categories.png)
+    ![Top Categories](presentation/topproducts.png)
 
 4. **Monthly Sales Trends**
     - Aggregate orders by month  
     - Plot trends  
 
-    ![Monthly Sales](presentation/monthly_sales_trends.png)
+    ![Monthly Sales](presentation/monthlysale.png)
 
 5. **Customer Segmentation**
     - Compute `total_orders` and `total_spend` per customer  
     -  plot segmentation  
 
-    ![Customer Segmentation](presentation/customer_segmentation.png)
+    ![Customer Segmentation](presentation/customer_segments_5groups.png)
 
 ---
 
